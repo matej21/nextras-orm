@@ -225,6 +225,14 @@ class DbalCollection implements ICollection
 	}
 
 
+	public function withQueryBuilder(callable $callback): self
+	{
+		$collection = clone $this;
+		$callback($collection->queryBuilder, $collection);
+		return $collection;
+	}
+
+
 	protected function getIteratorCount()
 	{
 		if ($this->resultCount === null) {
